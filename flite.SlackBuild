@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # 
-# $Id: flite.SlackBuild,v 1.1 2016/09/14 18:20:24 gsotirov Exp $
+# $Id: flite.SlackBuild,v 1.2 2016/09/14 19:49:17 gsotirov Exp $
 #
 
 . ../../slack-package.conf
@@ -53,6 +53,11 @@ tar -xvf $CWD/${NAME}-${VERSION}-release.tar.?z* || exit 3
 cd $SRC
 fix_source
 
+# Apply patch
+if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
+  patch -p1 -z -b.orig < $CWD/${NAME}-${VERSION}.diff || exit 4
+fi
+
 # Configure
 CFLAGS=$SLKCFLAGS \
 CXXFLAGS=$SLKCFLAGS \
@@ -84,6 +89,9 @@ install -m 644 $CWD/slack-required $PKG/install/slack-required
 mkdir -p $PKG/usr/src/slackbuilds/$NAME-$VERSION
 install -m 644 $CWD/slack-desc       $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-desc
 install -m 644 $CWD/slack-required   $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-required
+if [ -e $CWD/${NAME}-${VERSION}.diff ]; then
+  install -m 644 $CWD/${NAME}-${VERSION}.diff $PKG/usr/src/slackbuild/${NAME}-${VERSION}/${NAME}-${VERSION}.diff
+fi
 install -m 644 $CWD/$NAME.SlackBuild $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NAME.SlackBuild
 
 # Pack
