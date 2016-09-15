@@ -1,8 +1,8 @@
 # Link shared libs to -lm and -lasound to avoid 'undefined reference to' linker errors
 # See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=577335
-diff -urNad flite-1.4-release-orig/config/common_make_rules flite-1.4-release/config/common_make_rules
---- flite-1.4-release-orig/config/common_make_rules	2009-07-30 17:52:56.000000000 +0300
-+++ flite-1.4-release/config/common_make_rules	2016-09-14 22:28:22.567281822 +0300
+diff -urNad flite-2.0.0-release-orig/config/common_make_rules flite-2.0.0-release/config/common_make_rules
+--- flite-2.0.0-release-orig/config/common_make_rules	2012-01-15 17:06:52.000000000 +0200
++++ flite-2.0.0-release/config/common_make_rules	2016-09-15 20:02:33.000000000 +0300
 @@ -123,7 +123,7 @@
  	@ rm -rf shared_os && mkdir shared_os
  	@ rm -f $@ $@.${PROJECT_VERSION} $@.${PROJECT_SHLIB_VERSION} 
